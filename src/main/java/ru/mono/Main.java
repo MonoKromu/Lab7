@@ -41,7 +41,7 @@ public class Main {
                 .distinct()
                 .forEach(e -> System.out.println(e.getName()));
 
-        System.out.println("Books sorted by publishing year:");
+        System.out.println("\nBooks sorted by publishing year:");
         visitors.stream()
                 .flatMap(e -> e.getFavoriteBooks()
                 .stream())
@@ -75,14 +75,14 @@ public class Main {
                 .sum() /
                 visitors.stream()
                 .count();
-        ArrayList<ru.mono.Message> messages = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<>();
         visitors.stream()
                 .filter(Visitor::isSubscribed)
                 .forEach(e -> {
                     int books = e.getFavoriteBooks().size();
-                    String text = averageBookCount < books ? "read more" :
-                            (averageBookCount == books ? "fine" : "you are a bookworm");
-                    ru.mono.Message message = new ru.mono.Message();
+                    String text = books < averageBookCount ? "read more" :
+                            (books == averageBookCount ? "fine" : "you are a bookworm");
+                    Message message = new Message();
                     message.setText(text);
                     message.setNumber(e.getPhone());
                     messages.add(message);
